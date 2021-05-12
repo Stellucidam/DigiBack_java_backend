@@ -11,7 +11,6 @@ import java.util.Optional;
 @Builder
 @Entity
 @EqualsAndHashCode
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User {
     @Id
     @Getter

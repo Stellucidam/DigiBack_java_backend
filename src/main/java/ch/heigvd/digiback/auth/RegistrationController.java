@@ -6,17 +6,12 @@ import ch.heigvd.digiback.error.exception.CredentialsTooShortException;
 import ch.heigvd.digiback.error.exception.DuplicateUsernameException;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.transaction.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import static ch.heigvd.digiback.auth.TokenUtils.*;
-import static org.postgresql.shaded.com.ongres.scram.common.ScramStringFormatting.base64Encode;
 
 @RestController
+@RequestMapping("/auth")
 public class RegistrationController {
 
     private UserRepository users;
@@ -31,8 +26,7 @@ public class RegistrationController {
      * @param credentials The credentials to use for registration.
      * @return An authentication token for the provided account.
      */
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    @Transactional
+    @PostMapping("/register")
     public TokenCredentials register(@RequestBody UserCredentials credentials)
             throws DuplicateUsernameException, CredentialsTooShortException {
 
