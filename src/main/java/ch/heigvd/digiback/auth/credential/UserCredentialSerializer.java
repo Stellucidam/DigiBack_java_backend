@@ -7,17 +7,17 @@ import java.io.IOException;
 import org.springframework.boot.jackson.JsonComponent;
 
 @JsonComponent
-public class UserCredentialsSerializer extends JsonSerializer<UserCredentials> {
+public class UserCredentialSerializer extends JsonSerializer<UserCredential> {
 
     @Override
     public void serialize(
-            UserCredentials userCredentials,
+            UserCredential userCredential,
             JsonGenerator jsonGenerator,
             SerializerProvider serializerProvider
     ) throws IOException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("username", userCredentials.getUsername());
-        jsonGenerator.writeStringField("password", userCredentials.getPassword());
+        jsonGenerator.writeStringField("username", userCredential.getUsername());
+        jsonGenerator.writeStringField("password", userCredential.getPassword());
         jsonGenerator.writeEndObject();
     }
 }

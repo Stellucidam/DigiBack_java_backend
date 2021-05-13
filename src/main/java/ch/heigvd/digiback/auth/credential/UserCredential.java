@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class UserCredentials {
+public class UserCredential {
 
     private String username;
     private String password;

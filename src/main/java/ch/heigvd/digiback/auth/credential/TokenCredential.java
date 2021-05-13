@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Builder
 @Data
-public class TokenCredentials {
+public class TokenCredential {
 
     private String token;
-    private int idUser;
+    private Long idUser;
 }

@@ -1,7 +1,7 @@
 package ch.heigvd.digiback.auth;
 
-import ch.heigvd.digiback.auth.credential.TokenCredentials;
-import ch.heigvd.digiback.auth.credential.UserCredentials;
+import ch.heigvd.digiback.auth.credential.TokenCredential;
+import ch.heigvd.digiback.auth.credential.UserCredential;
 import ch.heigvd.digiback.error.exception.CredentialsTooShortException;
 import ch.heigvd.digiback.error.exception.DuplicateUsernameException;
 import ch.heigvd.digiback.user.User;
@@ -27,7 +27,7 @@ public class RegistrationController {
      * @return An authentication token for the provided account.
      */
     @PostMapping("/register")
-    public TokenCredentials register(@RequestBody UserCredentials credentials)
+    public TokenCredential register(@RequestBody UserCredential credentials)
             throws DuplicateUsernameException, CredentialsTooShortException {
 
         // Ensure that the username has a proper length.
@@ -54,7 +54,7 @@ public class RegistrationController {
 
         try {
             User inserted = users.saveAndFlush(user);
-            return TokenCredentials.builder()
+            return TokenCredential.builder()
                     .token(inserted.getToken())
                     .idUser(inserted.getIdUser())
                     .build();

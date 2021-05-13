@@ -14,8 +14,8 @@ import java.util.Optional;
 public class User {
     @Id
     @Getter
-    @GeneratedValue
-    private int idUser;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUser;
 
     @Getter
     private String username;
@@ -40,7 +40,7 @@ public class User {
      */
     public static User verifyUserWith(
             UserRepository UserRepository,
-            Integer idUser,
+            Long idUser,
             String token) throws WrongCredentialsException {
 
         Optional<User> modFromId = UserRepository.findById(idUser);
