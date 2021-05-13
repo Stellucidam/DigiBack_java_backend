@@ -2,9 +2,12 @@ package ch.heigvd.digiback.movement.seralizer;
 
 import ch.heigvd.digiback.movement.MovementData;
 import ch.heigvd.digiback.util.CsvUtil;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
@@ -25,22 +28,25 @@ public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
         Reader fileReader = null;
         CsvToBean<MovementData> csvToBean = null;
 
-        List<MovementData> customers = new ArrayList<Customer>();
+        List<MovementData> movements = new ArrayList<MovementData>();
 
         try {
             fileReader = new InputStreamReader(is);
 
-            ColumnPositionMappingStrategy<Customer> mappingStrategy = new ColumnPositionMappingStrategy<Customer>();
+            ColumnPositionMappingStrategy<MovementData> mappingStrategy = new ColumnPositionMappingStrategy<>();
 
-            mappingStrategy.setType(Customer.class);
+            mappingStrategy.setType(MovementData.class);
             mappingStrategy.setColumnMapping(CSV_HEADER);
 
-            csvToBean = new CsvToBeanBuilder<Customer>(fileReader).withMappingStrategy(mappingStrategy).withSkipLines(1)
-                    .withIgnoreLeadingWhiteSpace(true).build();
+            csvToBean = new CsvToBeanBuilder<MovementData>(fileReader)
+                    .withMappingStrategy(mappingStrategy)
+                    .withSkipLines(1)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
 
-            customers = csvToBean.parse();
+            movements = csvToBean.parse();
 
-            return customers;
+            return movements;
         } catch (Exception e) {
             System.out.println("Reading CSV Error!");
             e.printStackTrace();
@@ -53,6 +59,6 @@ public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
             }
         }
 
-        return customers;
+        return movements;
     }
 }
