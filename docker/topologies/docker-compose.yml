@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  spring-boot:
+    command: "./wait-for-it.sh database:3306"
+    build: ../images/digiback
+    #image: stellucidam/digiback-backend:debug
+    ports:
+      - "8081"
+      - "8081:8081"
+    links:
+      - database:db
+    depends_on:
+      - database
+
+  database:
+    build: ../images/mysql
+    #image: stellucidam/digiback-ddb:debug
+    ports:
+      - "3306"
+      - "3306:3306"
+    command: [
+          '--wait_timeout=28800',
+      ]
+    environment:
+      - MYSQL_USER=digiback_admin
+      - MYSQL_PASSWORD=kcabigib
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_USER=root
+      - MYSQL_DATABASE=digiback
+    volumes:
+      - ../images/mysql/database:/docker-entrypoint-initdb.d

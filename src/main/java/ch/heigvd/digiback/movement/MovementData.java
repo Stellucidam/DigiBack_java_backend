@@ -16,11 +16,7 @@ public class MovementData {
     private Long idMovementData;
 
     @Getter
-    @ManyToOne
-    private Movement movement;
-
-    @Getter
-    private Float times;
+    private Float time;
 
     @Getter
     private Float xLinearAcc;

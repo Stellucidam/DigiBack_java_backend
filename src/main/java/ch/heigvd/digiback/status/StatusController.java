@@ -8,6 +8,6 @@ public class StatusController {
 
     @GetMapping("/")
     public Status status() {
-        return new Status("Everything is fine.");
+        return new Status(StatusType.SUCCESS, "Everything is fine.");
     }
 }

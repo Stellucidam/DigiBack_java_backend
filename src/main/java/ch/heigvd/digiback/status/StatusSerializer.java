@@ -16,6 +16,7 @@ public class StatusSerializer extends JsonSerializer<Status> {
             SerializerProvider serializerProvider
     ) throws IOException {
         jsonGenerator.writeStartObject();
+        jsonGenerator.writeStringField("status", status.getStatus().toString());
         jsonGenerator.writeStringField("message", status.getMessage());
         jsonGenerator.writeEndObject();
     }

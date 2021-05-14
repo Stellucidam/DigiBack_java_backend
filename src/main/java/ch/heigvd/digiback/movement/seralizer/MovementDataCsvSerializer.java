@@ -11,6 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
+    private final static String[] CSV_HEADER = {
+            "Time (s)",
+            "Linear Acceleration x (m/s^2)",
+            "Linear Acceleration y (m/s^2)",
+            "Linear Acceleration z (m/s^2)",
+            "Absolute acceleration (m/s^2)"
+    };
+
     @Override
     public void ToCsv(Writer writer, List<MovementData> val) throws IOException {
 
@@ -18,16 +26,8 @@ public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
 
     @Override
     public List<MovementData> parseCsvFile(InputStream is) {
-        String[] CSV_HEADER = {
-                "Time (s)",
-                "Linear Acceleration x (m/s^2)",
-                "Linear Acceleration y (m/s^2)",
-                "Linear Acceleration z (m/s^2)",
-                "Absolute acceleration (m/s^2)"
-        };
         Reader fileReader = null;
         CsvToBean<MovementData> csvToBean = null;
-
         List<MovementData> movements = new ArrayList<MovementData>();
 
         try {

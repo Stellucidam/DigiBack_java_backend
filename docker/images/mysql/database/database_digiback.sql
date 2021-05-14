@@ -1,0 +1,5 @@
+DROP SCHEMA 'digiback';
+CREATE SCHEMA 'digiback' DEFAULT CHARACTER SET utf8mb4;
+CREATE USER 'digiback_admin'@'172.18.0.3' IDENTIFIED BY 'kcabigib';
+GRANT ALL PRIVILEGES ON *.* TO 'digiback_admin'@'172.18.0.3';
+FLUSH PRIVILEGES;

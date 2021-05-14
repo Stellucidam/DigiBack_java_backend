@@ -14,10 +14,10 @@ import static ch.heigvd.digiback.auth.TokenUtils.*;
 @RequestMapping("/auth")
 public class RegistrationController {
 
-    private UserRepository users;
+    private UserRepository userRepository;
 
-    public RegistrationController(UserRepository users) {
-        this.users = users;
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     /**
@@ -36,7 +36,7 @@ public class RegistrationController {
         }
 
         // Does this username already exist ?
-        if (users.findByUsername(credentials.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(credentials.getUsername()).isPresent()) {
             throw new DuplicateUsernameException();
         }
 
@@ -53,7 +53,7 @@ public class RegistrationController {
                 .build();
 
         try {
-            User inserted = users.saveAndFlush(user);
+            User inserted = userRepository.saveAndFlush(user);
             return TokenCredential.builder()
                     .token(inserted.getToken())
                     .idUser(inserted.getIdUser())
