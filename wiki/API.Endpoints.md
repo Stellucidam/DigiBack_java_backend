@@ -1,7 +1,7 @@
 # Table des matières
 
 - [Table des matières](#table-des-matières)
-- [List des endpoints](#list-des-endpoints)
+- [Liste des endpoints](#liste-des-endpoints)
     - [Authentification](#authentification)
       - [`POST /auth/register`](#post-authregister)
       - [`POST /auth/login`](#post-authlogin)
@@ -14,7 +14,7 @@
       - [`POST /pain/user/{idUser}/upload/`](#post-painuseriduserupload)
 - [Erreurs](#erreurs)
 
-# List des endpoints
+# Liste des endpoints
 
 ## Authentification
 
