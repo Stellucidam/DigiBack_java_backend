@@ -1,6 +1,7 @@
 package ch.heigvd.digiback.movement.credential;
 
 import ch.heigvd.digiback.movement.MovementType;
+import ch.heigvd.digiback.pain.PainCredential;
 import lombok.Builder;
 import lombok.Data;
 

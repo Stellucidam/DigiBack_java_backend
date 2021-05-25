@@ -1,39 +1,33 @@
-package ch.heigvd.digiback.movement;
+package ch.heigvd.digiback.pain;
 
-import ch.heigvd.digiback.pain.Pain;
+import ch.heigvd.digiback.movement.MovementType;
 import ch.heigvd.digiback.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
 @EqualsAndHashCode
-public class Movement {
+public class Pain {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMovement;
+    private Long idPain;
 
     @Getter
-    private MovementType type;
+    private MovementType movementType;
 
     @Getter
     private Date date;
-
-    @Getter
-    @OneToMany
-    private List<MovementData> movementData;
 
     @Getter
     @ManyToOne
     private User user;
 
     @Getter
-    @OneToOne(optional = true)
-    private Pain pain;
+    private int level;
 }

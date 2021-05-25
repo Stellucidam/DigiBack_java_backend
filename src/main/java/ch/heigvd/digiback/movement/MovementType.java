@@ -1,6 +1,7 @@
 package ch.heigvd.digiback.movement;
 
 public enum MovementType {
+    NONE,
     FRONT_TILT,
     BACK_TILT,
     LEFT_TILT,
@@ -11,6 +12,7 @@ public enum MovementType {
     @Override
     public String toString() {
         switch(this) {
+            case NONE: return "NONE";
             case FRONT_TILT: return "FRONT_TILT";
             case BACK_TILT: return "BACK_TILT";
             case LEFT_TILT: return "LEFT_TILT";
