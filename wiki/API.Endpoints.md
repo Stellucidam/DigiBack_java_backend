@@ -7,8 +7,11 @@
       - [`POST /auth/login`](#post-authlogin)
       - [`POST /auth/logout`](#post-authlogout)
     - [Mouvements](#mouvemements)
+      - [`POST /movement/user/{idUser}/upload/level/{level}`](#post-movementuseriduseruploadlevellevel)
       - [`POST /movement/user/{idUser}/upload`](#post-movementuseriduserupload)
     - [Statistiques](#statistiques)
+    - [Douleurs](#douleurs)
+      - [`POST /pain/user/{idUser}/upload/`](#post-painuseriduserupload)
 - [Erreurs](#erreurs)
 
 # List des endpoints
@@ -40,6 +43,22 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 
 ## Mouvements
 
+### `POST /movement/user/{idUser}/upload/level/{level}`
+Permet d'"uploader" un nouveau mouvement avec un niveau de douleur associé pour un utilisateur donné.
+
+L'identifiant de l'utilisateur doit remplacer le champ `{idUser}` dans la requête.
+Le niveau de douleur de l'utilisateur pour le movement doit remplacer le champ `{level}` dans la requête.
+Le token de l'utilisateur doit être entré dans les paramètres de la requête.
+La représentation json d'un mouvement doit être envoyée dans le corps de la requête.
+
+Si la requête est un succès, le serveur envoi un status indiquant le succès de l'action.
+```json
+{
+    "status": "success",
+    "message": "The movement data and pain level was uploaded successfully."
+}
+```
+
 ### `POST /movement/user/{idUser}/upload`
 Permet d'"uploader" un nouveau mouvement pour un utilisateur donné.
 
@@ -57,6 +76,22 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 
 ## Statistiques
 *Pas encore implémenté.*
+
+## Douleurs
+### `POST /pain/user/{idUser}/upload/`
+Permet d'"uploader" un nouveau niveau de douleur pour un utilisateur donné.
+
+L'identifiant de l'utilisateur doit remplacer le champ `{idUser}` dans la requête.
+Le token de l'utilisateur doit être entré dans les paramètres de la requête.
+La représentation json d'un niveau de douleur doit être envoyée dans le corps de la requête.
+
+Si la requête est un succès, le serveur envoi un status indiquant le succès de l'action.
+```json
+{
+    "status": "success",
+    "message": "The pain data was uploaded successfully."
+}
+```
 
 # Erreurs
 Si une erreur apparait, un message expliquant la raison de cette dernière est envoyé.
