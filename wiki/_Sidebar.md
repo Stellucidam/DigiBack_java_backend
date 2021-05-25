@@ -1,4 +1,4 @@
-# RockinApp - Wiki
+# DigiBack - Wiki
 
 [Home](https://github.com/Stellucidam/DigiBack_java_backend/wiki)
 
