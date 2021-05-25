@@ -30,6 +30,7 @@ public class ClientException extends Exception {
                 SerializerProvider serializerProvider
         ) throws IOException {
             jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("http-status", exception.getStatus().value());
             jsonGenerator.writeStringField("error", exception.getMessage());
             jsonGenerator.writeEndObject();
         }

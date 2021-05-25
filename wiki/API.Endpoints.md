@@ -3,7 +3,11 @@
 - [Table des matières](#table-des-matières)
 - [List des endpoints](#list-des-endpoints)
     - [Authentification](#authentification)
+      - [`POST /auth/register`](#post-authregister)
+      - [`POST /auth/login`](#post-authlogin)
+      - [`POST /auth/logout`](#post-authlogout)
     - [Mouvements](#mouvemements)
+      - [`POST /movement/user/{idUser}/upload`](#post-movementuseriduserupload)
     - [Statistiques](#statistiques)
 - [Erreurs](#erreurs)
 
@@ -59,6 +63,7 @@ Si une erreur apparait, un message expliquant la raison de cette dernière est e
 En voici un exemple :
 ```json
 {
+  "http-status": 404,
   "error": "The requested resource could not be found."
 }
 ```
