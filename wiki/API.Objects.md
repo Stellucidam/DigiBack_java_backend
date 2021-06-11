@@ -5,9 +5,12 @@
   - [Client](#client)
   - [Serveur](#serveur)
 - [Mouvement](#mouvement)
-    - [Client](#client-1)
+  - [Client](#client-1)
 - [Douleur](#douleur)
-    - [Client](#client-2)
+  - [Client](#client-2)
+- [Activité](#activite)
+  - [Client](#client-3)
+  - [Serveur](#serveur-1)
 
 # Utilisateur
 
@@ -57,5 +60,29 @@ Quand le client doit envoyer un niveau de douleur au serveur.
     "movementType" : "FRONT_TILT",
     "date" : "2021-03-03",
     "level" : 4
+}
+```
+
+
+# Activité
+## Client
+Quand le client doit envoyer une activité au serveur.
+```json
+{
+  "date": "2020-01-01",
+  "nbrSteps": 12,
+  "nbrExercices": 2,
+  "nbrQuiz": 22
+}
+```
+## Serveur
+Quand le serveur doit envoyer une activité au client.
+```json
+{
+  "idUser": 1,
+  "date": "2020-01-02",
+  "nbrSteps": 12,
+  "nbrExercices": 2,
+  "nbrQuiz": 22
 }
 ```
