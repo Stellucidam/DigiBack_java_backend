@@ -11,7 +11,7 @@
       - [`POST /movement/user/{idUser}/upload`](#post-movementuseriduserupload)
     - [Statistiques](#statistiques)
     - [Douleurs](#douleurs)
-      - [`POST /pain/user/{idUser}/upload/`](#post-painuseriduserupload)
+      - [`POST /activity/user/{idUser}/upload/`](#post-painuseriduserupload)
 - [Erreurs](#erreurs)
 
 # Liste des endpoints
@@ -55,7 +55,7 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 ```json
 {
     "status": "success",
-    "message": "The movement data and pain level was uploaded successfully."
+    "message": "The movement data and activity level was uploaded successfully."
 }
 ```
 
@@ -78,7 +78,7 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 *Pas encore implémenté.*
 
 ## Douleurs
-### `POST /pain/user/{idUser}/upload/`
+### `POST /activity/user/{idUser}/upload/`
 Permet d'"uploader" un nouveau niveau de douleur pour un utilisateur donné.
 
 L'identifiant de l'utilisateur doit remplacer le champ `{idUser}` dans la requête.
@@ -89,7 +89,7 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 ```json
 {
     "status": "success",
-    "message": "The pain data was uploaded successfully."
+    "message": "The activity data was uploaded successfully."
 }
 ```
 
