@@ -17,6 +17,7 @@ public class UserCredentialSerializer extends JsonSerializer<UserCredential> {
     ) throws IOException {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeStringField("username", userCredential.getUsername());
+        jsonGenerator.writeStringField("email", userCredential.getEmail());
         jsonGenerator.writeStringField("password", userCredential.getPassword());
         jsonGenerator.writeEndObject();
     }

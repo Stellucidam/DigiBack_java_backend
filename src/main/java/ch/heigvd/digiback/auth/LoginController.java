@@ -5,19 +5,18 @@ import java.util.Optional;
 import ch.heigvd.digiback.auth.credential.TokenCredential;
 import ch.heigvd.digiback.auth.credential.UserCredential;
 import ch.heigvd.digiback.error.exception.UnknownUserCredentialsException;
+import ch.heigvd.digiback.error.exception.UnverifiedAccountException;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
 
+    @Autowired
     private UserRepository userRepository;
-
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     /**
      * Logs a user in, provided that they give their username and their password.
@@ -28,7 +27,7 @@ public class LoginController {
      */
     @PostMapping("/login")
     public TokenCredential login(@RequestBody UserCredential credentials)
-            throws UnknownUserCredentialsException {
+            throws UnknownUserCredentialsException, UnverifiedAccountException {
 
         Optional<User> user = userRepository.findByUsername(credentials.getUsername());
         Optional<String> actualSecret = user.map(User::getSalt)
@@ -36,10 +35,14 @@ public class LoginController {
                 .map(salt -> TokenUtils.getSecret(credentials.getPassword(), salt));
 
         if (user.isPresent() && user.map(User::getSecret).equals(actualSecret)) {
+          if (user.get().isEnabled()) {
             return TokenCredential.builder()
-                    .token(user.get().getToken())
-                    .idUser(user.get().getIdUser())
-                    .build();
+                .token(user.get().getToken())
+                .idUser(user.get().getIdUser())
+                .build();
+            } else {
+              throw new UnverifiedAccountException();
+          }
         } else {
             throw new UnknownUserCredentialsException();
         }

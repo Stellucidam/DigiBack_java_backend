@@ -6,6 +6,7 @@ import ch.heigvd.digiback.status.Status;
 import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -16,11 +17,8 @@ import static ch.heigvd.digiback.auth.TokenUtils.*;
 @RequestMapping("/auth")
 public class LogoutController {
 
+    @Autowired
     private UserRepository userRepository;
-
-    public LogoutController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     /**
      * Logs a user out, provided that they give their username and their password.

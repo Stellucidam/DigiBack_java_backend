@@ -8,6 +8,7 @@ import ch.heigvd.digiback.status.Status;
 import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
@@ -17,22 +18,17 @@ import java.util.Optional;
 @RequestMapping("/movement")
 public class MovementController {
 
+    @Autowired
     private UserRepository userRepository;
-    private PainRepository painRepository;
-    private MovementRepository movementRepository;
-    private MovementDataRepository movementDataRepository;
 
-    public MovementController(
-            MovementRepository movementRepository,
-            MovementDataRepository movementDataRepository,
-            UserRepository userRepository,
-            PainRepository painRepository
-    ) {
-        this.userRepository = userRepository;
-        this.painRepository = painRepository;
-        this.movementRepository = movementRepository;
-        this.movementDataRepository = movementDataRepository;
-    }
+    @Autowired
+    private PainRepository painRepository;
+
+    @Autowired
+    private MovementRepository movementRepository;
+
+    @Autowired
+    private MovementDataRepository movementDataRepository;
 
     @PostMapping("/user/{idUser}/upload/level/{level}")
     public Status uploadMovementDataWithPain(

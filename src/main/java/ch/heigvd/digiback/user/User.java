@@ -21,6 +21,9 @@ public class User {
     private String username;
 
     @Getter
+    private String email;
+
+    @Getter
     private String secret;
 
     @Getter
@@ -29,9 +32,13 @@ public class User {
     @Getter
     private String token;
 
+    @Getter
+    @Setter
+    private boolean enabled;
+
     /** Verifies that a given idUser and token belong to the same User.
      *
-     * @param UserRepository The User repository
+     * @param userRepository The User repository
      * @param idUser The given User id
      * @param token The given token
      * @return Returns a User if the token and the id match
@@ -39,12 +46,12 @@ public class User {
      *         User doesn't exist.
      */
     public static User verifyUserWith(
-            UserRepository UserRepository,
+            UserRepository userRepository,
             Long idUser,
             String token) throws WrongCredentialsException {
 
-        Optional<User> modFromId = UserRepository.findById(idUser);
-        if (modFromId.isEmpty() || ! modFromId.equals(UserRepository.findByToken(token))) {
+        Optional<User> modFromId = userRepository.findById(idUser);
+        if (modFromId.isEmpty() || ! modFromId.equals(userRepository.findByToken(token))) {
             throw new WrongCredentialsException();
         }
 

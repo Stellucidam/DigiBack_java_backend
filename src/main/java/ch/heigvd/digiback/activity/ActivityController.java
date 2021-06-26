@@ -6,6 +6,7 @@ import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -15,16 +16,11 @@ import java.util.Optional;
 @RequestMapping("/activity")
 public class ActivityController {
 
+    @Autowired
     private UserRepository userRepository;
-    private ActivityRepository activityRepository;
 
-    public ActivityController(
-            ActivityRepository activityRepository,
-            UserRepository userRepository
-    ) {
-        this.userRepository = userRepository;
-        this.activityRepository = activityRepository;
-    }
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @GetMapping("/user/{idUser}/date/{date}")
     public ActivityCredential getActivityFromDate(

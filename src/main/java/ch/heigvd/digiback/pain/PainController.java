@@ -5,6 +5,7 @@ import ch.heigvd.digiback.status.Status;
 import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -13,16 +14,11 @@ import java.util.Optional;
 @RequestMapping("/pain")
 public class PainController {
 
+    @Autowired
     private UserRepository userRepository;
-    private PainRepository painRepository;
 
-    public PainController(
-            PainRepository painRepository,
-            UserRepository userRepository
-    ) {
-        this.userRepository = userRepository;
-        this.painRepository = painRepository;
-    }
+    @Autowired
+    private PainRepository painRepository;
 
     @PostMapping("/user/{idUser}/upload")
     public Status uploadPain(

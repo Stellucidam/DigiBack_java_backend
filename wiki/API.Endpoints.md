@@ -81,7 +81,7 @@ Si la requête est un succès, le serveur envoi un status indiquant le succès d
 *Pas encore implémenté.*
 
 ## Douleurs
-### `POST /activity/user/{idUser}/upload/`
+### `POST /pain/user/{idUser}/upload/`
 Permet d'"uploader" un nouveau niveau de douleur pour un utilisateur donné.
 
 L'identifiant de l'utilisateur doit remplacer le champ `{idUser}` dans la requête.
