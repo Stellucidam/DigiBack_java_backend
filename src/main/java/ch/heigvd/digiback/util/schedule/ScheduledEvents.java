@@ -1,7 +1,7 @@
 package ch.heigvd.digiback.util.schedule;
 
-import ch.heigvd.digiback.user.User;
-import ch.heigvd.digiback.user.UserRepository;
+import ch.heigvd.digiback.business.user.User;
+import ch.heigvd.digiback.business.user.UserRepository;
 import ch.heigvd.digiback.verification.VerificationToken;
 import ch.heigvd.digiback.verification.VerificationTokenRepository;
 import org.slf4j.Logger;

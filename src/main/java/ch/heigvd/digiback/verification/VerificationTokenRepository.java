@@ -1,6 +1,6 @@
 package ch.heigvd.digiback.verification;
 
-import ch.heigvd.digiback.user.User;
+import ch.heigvd.digiback.business.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

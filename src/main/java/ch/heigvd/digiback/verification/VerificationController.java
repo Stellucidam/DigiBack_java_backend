@@ -1,12 +1,10 @@
 package ch.heigvd.digiback.verification;
 
-import ch.heigvd.digiback.auth.credential.TokenCredential;
 import ch.heigvd.digiback.error.exception.UnknownUserCredentialsException;
-import ch.heigvd.digiback.listener.RegistrationListener;
 import ch.heigvd.digiback.status.Status;
 import ch.heigvd.digiback.status.StatusType;
-import ch.heigvd.digiback.user.User;
-import ch.heigvd.digiback.user.UserRepository;
+import ch.heigvd.digiback.business.user.User;
+import ch.heigvd.digiback.business.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

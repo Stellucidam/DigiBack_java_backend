@@ -6,8 +6,8 @@ import ch.heigvd.digiback.auth.credential.TokenCredential;
 import ch.heigvd.digiback.auth.credential.UserCredential;
 import ch.heigvd.digiback.error.exception.UnknownUserCredentialsException;
 import ch.heigvd.digiback.error.exception.UnverifiedAccountException;
-import ch.heigvd.digiback.user.User;
-import ch.heigvd.digiback.user.UserRepository;
+import ch.heigvd.digiback.business.user.User;
+import ch.heigvd.digiback.business.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

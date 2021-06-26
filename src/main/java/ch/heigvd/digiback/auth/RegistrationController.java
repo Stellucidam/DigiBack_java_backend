@@ -6,20 +6,16 @@ import ch.heigvd.digiback.error.exception.CredentialsTooShortException;
 import ch.heigvd.digiback.error.exception.DuplicateUsernameException;
 import ch.heigvd.digiback.error.exception.EmailException;
 import ch.heigvd.digiback.event.OnRegistrationComplete;
-import ch.heigvd.digiback.listener.RegistrationListener;
-import ch.heigvd.digiback.user.User;
-import ch.heigvd.digiback.user.UserRepository;
+import ch.heigvd.digiback.business.user.User;
+import ch.heigvd.digiback.business.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.util.UUID;
 
 import static ch.heigvd.digiback.auth.TokenUtils.*;
 

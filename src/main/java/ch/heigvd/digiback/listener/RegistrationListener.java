@@ -1,13 +1,12 @@
 package ch.heigvd.digiback.listener;
 
 import ch.heigvd.digiback.event.OnRegistrationComplete;
-import ch.heigvd.digiback.user.User;
-import ch.heigvd.digiback.user.UserService;
+import ch.heigvd.digiback.business.user.User;
+import ch.heigvd.digiback.business.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
