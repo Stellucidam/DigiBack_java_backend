@@ -75,7 +75,6 @@ public class RegistrationController {
 
         try {
             User inserted = userRepository.saveAndFlush(user);
-            // TODO
             logger.info("Should send an email at some point...");
 
             try{

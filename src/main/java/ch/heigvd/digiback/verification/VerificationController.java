@@ -2,15 +2,15 @@ package ch.heigvd.digiback.verification;
 
 import ch.heigvd.digiback.auth.credential.TokenCredential;
 import ch.heigvd.digiback.error.exception.UnknownUserCredentialsException;
+import ch.heigvd.digiback.listener.RegistrationListener;
 import ch.heigvd.digiback.status.Status;
 import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.user.User;
 import ch.heigvd.digiback.user.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class VerificationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(VerificationController.class);
     @Autowired
     private UserRepository userRepository;
 
@@ -27,23 +28,24 @@ public class VerificationController {
     /**
      * Logs a user in, provided that they give their username and their password.
      *
-     * @param credentials The credentials object that is received.
      * @return An authentication token for the provided account.
      * @throws UnknownUserCredentialsException If the provided credentials are unknown to the app.
      */
-    @PostMapping("/verify")
-    public Status login(@RequestBody TokenCredential credentials)
+    @PostMapping("/verify/user/{userId}")
+    public Status verify(@PathVariable Long userId,
+                         @RequestParam(name = "token") String token)
             throws UnknownUserCredentialsException {
 
-        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(credentials.getToken());
+        logger.info("Received confirmation");
+        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         /** TODO : voir si besoin
         Optional<String> actualSecret = verificationToken.map(User::getSalt)
                 .map(TokenUtils::base64Decode)
                 .map(salt -> TokenUtils.getSecret(credentials.getPassword(), salt));
          */
 
-        if (verificationToken.isPresent() && verificationToken.get().getUser().getIdUser().equals(credentials.getIdUser())) {
-           Optional<User> user = userRepository.findById(credentials.getIdUser());
+        if (verificationToken.isPresent() && verificationToken.get().getUser().getIdUser().equals(userId)) {
+           Optional<User> user = userRepository.findById(userId);
             if (user.isPresent()) {
                 user.get().setEnabled(true);
                 userRepository.saveAndFlush(user.get());

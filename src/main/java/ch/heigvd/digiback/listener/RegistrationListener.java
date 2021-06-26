@@ -41,11 +41,13 @@ public class RegistrationListener implements
         String recipientAddress = user.getEmail();
         SimpleMailMessage email = new SimpleMailMessage();
         String subject = "Registration Confirmation for DigiBack";
-        String confirmationUrl
-                = "/registrationConfirm.html?token=" + token;
+        String confirmationUrl = "/auth/verify/user/" + user.getIdUser() + "?token=" + token;
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText("\r\n" + "http://localhost:8080" + confirmationUrl);
+
+        logger.info(email.getText());
+
 
         logger.info("Sending an email to : " + recipientAddress + "...");
         mailSender.send(email);
