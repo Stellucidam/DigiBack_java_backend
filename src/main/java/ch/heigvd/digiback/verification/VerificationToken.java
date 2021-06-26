@@ -43,4 +43,11 @@ public class VerificationToken {
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
     }
+
+    public boolean isExpired() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        Date currentDate = new Date(cal.getTime().getTime());
+        return currentDate.after(expiryDate) || currentDate.equals(expiryDate);
+    }
 }
