@@ -6,12 +6,13 @@
       - [`POST /auth/register`](#post-authregister)
       - [`POST /auth/login`](#post-authlogin)
       - [`POST /auth/logout`](#post-authlogout)
+      - [`POST /auth/verify/user/{userId}`](#post-authverifyuseruserid)
     - [Mouvements](#mouvemements)
       - [`POST /movement/user/{idUser}/upload/level/{level}`](#post-movementuseriduseruploadlevellevel)
       - [`POST /movement/user/{idUser}/upload`](#post-movementuseriduserupload)
     - [Statistiques](#statistiques)
     - [Douleurs](#douleurs)
-      - [`POST /activity/user/{idUser}/upload/`](#post-painuseriduserupload)
+      - [`POST /pain/user/{idUser}/upload/`](#post-painuseriduserupload)
     - [Activité](#activite)
         - [`POST /activity/user/{idUser}/upload`](#post-activityuseriduserupload)
         - [`GET /activity/user/{idUser}/date/{date}`](#get-activityuseriduserdatedate)
@@ -41,6 +42,14 @@ Si la requête est un succès, le serveur envoi le token de l'utilisateur connec
 Permet à un utilisateur connecté de se "délogger".
 
 La représentation json d'un utilisateur doit être envoyée dans le corps de la requête.
+
+Si la requête est un succès, le serveur envoi un status indiquant le succès de l'action.
+
+
+### `POST /auth/verify/user/{userId}`
+Permet à un nouvel utilisateur de valider son adresse e-mail.
+
+Le token de vérification de l'utilisateur doit être envoyée dans le corps de la requête.
 
 Si la requête est un succès, le serveur envoi un status indiquant le succès de l'action.
 

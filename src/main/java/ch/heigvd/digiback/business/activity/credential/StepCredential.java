@@ -1,4 +1,4 @@
-package ch.heigvd.digiback.business.activity;
+package ch.heigvd.digiback.business.activity.credential;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,10 +7,8 @@ import java.sql.Date;
 
 @Builder
 @Data
-public class ActivityCredential {
+public class StepCredential {
     private Long idUser;
     private Date date;
     private Long nbrSteps;
-    private Long nbrExercices;
-    private Long nbrQuiz;
 }

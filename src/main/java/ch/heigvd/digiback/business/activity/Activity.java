@@ -22,12 +22,15 @@ public class Activity {
     private Date date;
 
     @Getter
+    @Setter
     private Long nbrSteps;
 
     @Getter
+    @Setter
     private Long nbrExercices;
 
     @Getter
+    @Setter
     private Long nbrQuiz;
 
     @Getter
