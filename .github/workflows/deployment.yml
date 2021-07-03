@@ -19,9 +19,9 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Start Docker Images
         run: | 
-          cd ../DigiBack_java_backend/
-          git stash 
-          git stash drop
-          git pull
-          cat start_docker.sh
+          cd ../DigiBack_java_backend/ \
+          git stash \
+          git stash drop \
+          git pull \
+          cat start_docker.sh \
           echo $VM_PASSWORD | sudo -S ./start_docker.sh
