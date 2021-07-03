@@ -3,8 +3,8 @@ version: '3.3'
 services:
   digiback:
     command: "./wait-for-it.sh database:3306"
-    build: ../images/digiback
-    #image: stellucidam/digiback-backend:debug
+    #build: ../images/digiback
+    image: stellucidam/digiback-backend:debug
     ports:
       - "8080:8080"
     links:
@@ -13,8 +13,8 @@ services:
       - database
 
   database:
-    build: ../images/mysql
-    #image: stellucidam/digiback-ddb:debug
+    #build: ../images/mysql
+    image: stellucidam/digiback-ddb:debug
     ports:
       - "3307:3306"
     command: [
