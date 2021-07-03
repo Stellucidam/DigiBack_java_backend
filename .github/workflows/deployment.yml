@@ -5,14 +5,13 @@ jobs:
   workflow_dispatch: 
     runs-on: ubuntu-latest
     steps:
-      - name: JDK 11
+      - uses: actions/checkout@v2
+      - name: JDK setup
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 1.11
       - name: Build application
-        run: |
-          # Could also be a maven task
-          mvn clean package install
+        run: mvn clean package install
       - name: Upload application
         uses: appleboy/scp-action@master
         with:       
