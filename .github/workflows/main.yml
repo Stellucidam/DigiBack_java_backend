@@ -1,0 +1,81 @@
+image: ruby:2.7
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - gem install bundler
+  - bundle install --path vendor
+test:
+  stage: test
+  script:
+    - bundle exec jekyll build -d test
+  artifacts:
+    paths:
+      - test
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master"'
+
+pages:
+  stage: deploy
+  script:
+    - bundle exec jekyll build -d public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+
+deploy environment:
+  # Define the job's stage
+  stage: deploy
+  # Define when the job should be run
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+  # Define the image to use
+  image: alpine:edge
+  # Install all the required packages and connect to the VPN
+  before_script:
+    # Exit immediately if a command exits with a non-zero status
+    - set -o errexit
+    # Treat unset variables as an error when substituting
+    - set -o nounset
+    # Add required packages
+    - apk add --no-cache openconnect openssh-client
+    # Connect to the VPN
+    - echo "$VPN_USER_PASSWORD" | openconnect --user=$VPN_USER_USERNAME --passwd-on-stdin --background $VPN_HOSTNAME
+    # Hacky: wait for the VPN to be up
+    - sleep 5
+    # Configure SSH
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # Create the SSH private key
+    - echo "$VM_USER_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+    - chmod 700 ~/.ssh/id_ed25519
+    # Add the VM hostname to known hosts
+    - ssh-keyscan "$VM_HOSTNAME" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    # Execute the commands on the VM
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend; git stash; git pull" # Get the latest version of the backend project
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend; mvn clean package install" # Install project
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend; cp ./target/*.jar ./docker/images/digiback/artifact/app.jar" # Save jar app
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend; docker login --username=$DOCKER_USRNAME --password=$DOCKER_PSWD" # Login to docker hub
+    # Update backend docker image
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/images/digiback/; docker build -t stellucidam/digiback-app:latest ." # Build the corresponding docker image
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/images/digiback/; docker push stellucidam/digiback-app:latest" # Update the corresponding docker image
+    # Update database docker image
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/images/mysql/; docker build -t stellucidam/digiback-ddb:latest ." # Build the corresponding docker image
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/images/mysql/; docker push stellucidam/digiback-ddb:latest" # Update the corresponding docker image
+    # Deploy application
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/topologies/letsencrypt; rm acme.json" # Get the latest version of the docker images
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/topologies/letsencrypt; touch acme.json" # Get the latest version of the docker images
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/topologies/letsencrypt; chmod 600 acme.json" # Get the latest version of the docker images
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/topologies; docker-compose pull" # Get the latest version of the docker images
+    - ssh $VM_USER_USERNAME@$VM_HOSTNAME "cd DigiBack_java_backend/docker/topologies; docker-compose up --detach" # Start the infrastructure in background
