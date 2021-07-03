@@ -23,4 +23,5 @@ jobs:
           git stash 
           git stash drop
           git pull
+          cat start_docker.sh
           echo $VM_PASSWORD | sudo -S ./start_docker.sh
