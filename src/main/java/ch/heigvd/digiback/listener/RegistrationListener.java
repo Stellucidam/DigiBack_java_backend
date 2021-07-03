@@ -36,7 +36,7 @@ public class RegistrationListener implements
         String token = UUID.randomUUID().toString();
         service.createVerificationToken(user, token);
 
-        // TODO send mail message
+        // TODO send mail message - done
         String recipientAddress = user.getEmail();
         SimpleMailMessage email = new SimpleMailMessage();
         String subject = "Registration Confirmation for DigiBack";
