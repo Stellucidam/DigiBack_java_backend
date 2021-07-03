@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  spring-boot:
+  digiback:
     command: "./wait-for-it.sh database:3306"
     build: ../images/digiback
     #image: stellucidam/digiback-backend:debug

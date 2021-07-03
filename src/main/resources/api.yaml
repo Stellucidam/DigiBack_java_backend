@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  title: Nutricare API
+  title: Digiback API
   version: '0.0.1'
   description: This API is used to communicate with the Digiback Backend Service.
   license:
