@@ -19,7 +19,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Start Docker Images
         run: | 
-          cd ~/DigiBack_java_backend/ \
+          cd ../DigiBack_java_backend/ \
           git stash \
           git stash drop \
           git pull \
