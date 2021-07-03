@@ -1,0 +1,241 @@
+openapi: '3.0.3'
+info:
+  title: Nutricare API
+  version: '0.0.1'
+  description: This API is used to communicate with the Digiback Backend Service.
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+externalDocs:
+  description: Git Repository
+  url: 'https://github.com/Stellucidam/DigiBack_java_backend'
+servers:
+  - url: 'http://localhost:8081'
+# - url: 'https://193.134.218.13/'
+
+
+paths:
+  /:
+    get:
+      summary: "GET "
+      operationId: "status"
+      responses:
+        "200":
+          description: "OK"
+
+  /activity/user/{idUser}/date/{date}:
+    get:
+      summary: "GET activity/user/{idUser}/date/{date}"
+      operationId: "getActivityFromDate"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "date"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /activity/user/{idUser}/upload:
+    post:
+      summary: "POST activity/user/{idUser}/upload"
+      operationId: "uploadActivity"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /activity/user/{idUser}/upload/exercises:
+    post:
+      summary: "POST activity/user/{idUser}/upload/exercises"
+      operationId: "uploadExercise"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /activity/user/{idUser}/upload/quiz:
+    post:
+      summary: "POST activity/user/{idUser}/upload/quiz"
+      operationId: "uploadQuiz"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /activity/user/{idUser}/upload/steps:
+    post:
+      summary: "POST activity/user/{idUser}/upload/steps"
+      operationId: "uploadSteps"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /auth/login:
+    post:
+      summary: "POST auth/login"
+      operationId: "login"
+      responses:
+        "200":
+          description: "OK"
+
+  /auth/logout:
+    post:
+      summary: "POST auth/logout"
+      operationId: "logout"
+      responses:
+        "200":
+          description: "OK"
+
+  /auth/register:
+    post:
+      summary: "POST auth/register"
+      operationId: "register"
+      responses:
+        "200":
+          description: "OK"
+
+  /auth/verify/user/{userId}:
+    post:
+      summary: "POST auth/verify/user/{userId}"
+      operationId: "verify"
+      parameters:
+        - name: "userId"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /error: {}
+
+  /movement/user/{idUser}/upload:
+    post:
+      summary: "POST movement/user/{idUser}/upload"
+      operationId: "uploadMovementData"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /movement/user/{idUser}/upload/level/{level}:
+    post:
+      summary: "POST movement/user/{idUser}/upload/level/{level}"
+      operationId: "uploadMovementDataWithPain"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "level"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int32"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+
+  /pain/user/{idUser}/upload:
+    post:
+      summary: "POST pain/user/{idUser}/upload"
+      operationId: "uploadPain"
+      parameters:
+        - name: "idUser"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+        - name: "token"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
