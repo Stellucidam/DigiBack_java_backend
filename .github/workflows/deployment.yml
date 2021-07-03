@@ -18,9 +18,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Start Docker Images
-        run: | 
-          cd ../DigiBack_java_backend/
-          git stash 
-          git stash drop
-          git pull
-          ./start_docker.sh
+        run: cd ../DigiBack_java_backend/ & pwd & echo "Content" & ls & git pull & echo $VM_PASSWORD | sudo -S ./start_docker.sh
