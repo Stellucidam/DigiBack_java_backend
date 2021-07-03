@@ -6,8 +6,7 @@ services:
     build: ../images/digiback
     #image: stellucidam/digiback-backend:debug
     ports:
-      - "8081"
-      - "8081:8081"
+      - "8080:8080"
     links:
       - database:db
     depends_on:
@@ -17,8 +16,7 @@ services:
     build: ../images/mysql
     #image: stellucidam/digiback-ddb:debug
     ports:
-      - "3306"
-      - "3306:3306"
+      - "3307:3306"
     command: [
           '--wait_timeout=28800',
       ]
