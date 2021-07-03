@@ -12,10 +12,7 @@ jobs:
       - name: Build application
         run: |
           # Could also be a maven task
-          ls
-          cd ..
-          ls
-          mvn clean package install
+          mvn -f pom.xml clean package install
       - name: Upload application
         uses: appleboy/scp-action@master
         with:       
