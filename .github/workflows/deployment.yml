@@ -25,6 +25,9 @@ jobs:
           host: ${{ secrets.VM_HOSTNAME }}        
           username: ${{ secrets.VM_USER_USERNAME }}      
           key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
-          port: 22
-          source: "my-app.jar"      
-          target: "~/source"
+          port: 22    
+          script: |
+            cd DigiBack_java_backend
+            chmod -x update_docker.sh
+            chmod -x start_docker.sh
+            ./start_docker.sh
