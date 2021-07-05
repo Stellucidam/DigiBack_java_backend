@@ -2,7 +2,7 @@ name: deploy
 on: [push, pull_request]
 
 jobs:
-  workflow_dispatch: 
+  workflow_dispatch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
             ${{ runner.os }}-maven-
       #- name: Start Docker Images
       #  run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
-      
+
       - name: Install Open VPN
         run: |
           sudo apt-get install openvpn
@@ -30,21 +30,21 @@ jobs:
         id: connect_vpn
         with:
           PING_URL: ${{ secrets.VPN_HOSTNAME }}
-          #FILE_OVPN: '.github/vpn/config.ovpn'
+          FILE_OVPN: '.github/vpn/config.ovpn'
         env:
           USER_CRT: ${{ secrets.VPN_USER_USERNAME }}
           USER_KEY: ${{ secrets.VPN_USER_PASSWORD }}
 
       - name: Check Connect VPN
         run: echo ${{ steps.connect_vpn.outputs.STATUS }}
-        
+
       - name: Start Service
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VM_HOSTNAME }}        
-          username: ${{ secrets.VM_USER_USERNAME }}      
+          host: ${{ secrets.VM_HOSTNAME }}
+          username: ${{ secrets.VM_USER_USERNAME }}
           key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
-          port: 22    
+          port: 22
           script: |
             cd DigiBack_java_backend
             git pull
