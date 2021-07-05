@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mvn clean install
+mvn clean install -DskipTests
 
 cp ./target/*.jar ./docker/images/digiback/artifact/app.jar
 

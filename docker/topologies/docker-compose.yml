@@ -4,9 +4,10 @@ services:
   digiback:
     command: "./wait-for-it.sh database:3306"
     #build: ../images/digiback
+    restart: unless-stopped
     image: stellucidam/digiback-backend:debug
     ports:
-      - "8080:8080"
+      - "8080"
     links:
       - database:db
     depends_on:
@@ -16,7 +17,7 @@ services:
     #build: ../images/mysql
     image: stellucidam/digiback-ddb:debug
     ports:
-      - "3307:3306"
+      - "3306"
     command: [
           '--wait_timeout=28800',
       ]
@@ -28,5 +29,3 @@ services:
       - MYSQL_DATABASE=digiback
     volumes:
       - ../images/mysql/database:/docker-entrypoint-initdb.d
-
-  echo mypassword | sudo -S
