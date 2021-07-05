@@ -9,7 +9,7 @@ buildNumber.properties
 .mvn/timing.properties
 
 # Ignore app file
-# docker/images/digiback/artifact/app.jar
+docker/images/digiback/artifact/app.jar
 
 # Ignore debugging scripts
 debbug_start_docker.sh
