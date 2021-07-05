@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   workflow_dispatch: 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: JDK setup
@@ -17,5 +17,5 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Start Docker Images
-        run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
+      #- name: Start Docker Images
+      #  run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
