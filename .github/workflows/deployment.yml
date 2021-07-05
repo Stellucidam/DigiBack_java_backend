@@ -32,6 +32,10 @@ jobs:
           PING_URL: ${{ secrets.VPN_HOSTNAME }}
           FILE_OVPN: '.github/vpn/config.ovpn'
           SECRET: ${{ secrets.SECRET_USERNAME_PASSWORD }}
+        env:
+          CA_CRT: ${{ secrets.CA_CRT}}
+          USER_CRT: ${{ secrets.VPN_USER_USERNAME }}
+          USER_KEY: ${{ secrets.VPN_USER_PASSWORD }}
 
       - name: Check Connect VPN
         run: echo ${{ steps.connect_vpn.outputs.STATUS }}
