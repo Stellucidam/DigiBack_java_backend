@@ -25,6 +25,13 @@ jobs:
           host: ${{ secrets.VM_HOSTNAME }}        
           username: ${{ secrets.VM_USER_USERNAME }}      
           key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
+          port: 22
+      - name: Start Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOSTNAME }}        
+          username: ${{ secrets.VM_USER_USERNAME }}      
+          key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
           port: 22    
           script: |
             cd DigiBack_java_backend
