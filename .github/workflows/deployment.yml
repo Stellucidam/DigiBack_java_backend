@@ -46,24 +46,6 @@ jobs:
           key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
           port: 22    
           script: |
-            set -o errexit
-            # Treat unset variables as an error when substituting
-            set -o nounset
-            # Add required packages
-            apk add --no-cache openconnect openssh-client
-            # Connect to the VPN
-            echo "$VPN_USER_PASSWORD" | openconnect --user=$VPN_USER_USERNAME --passwd-on-stdin --background $VPN_HOSTNAME
-            # Hacky: wait for the VPN to be up
-            sleep 5
-            # Configure SSH
-            mkdir -p ~/.ssh
-            chmod 700 ~/.ssh
-            # Create the SSH private key
-            echo "$VM_USER_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-            chmod 700 ~/.ssh/id_ed25519
-            # Add the VM hostname to known hosts
-            ssh-keyscan "$VM_HOSTNAME" > ~/.ssh/known_hosts
-            chmod 644 ~/.ssh/known_hosts
             cd DigiBack_java_backend
             git pull
             ./start_docker.sh
