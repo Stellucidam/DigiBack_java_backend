@@ -30,7 +30,7 @@ jobs:
         id: connect_vpn
         with:
           PING_URL: ${{ secrets.VPN_HOSTNAME }}
-          FILE_OVPN: '.github/vpn/config.ovpn'
+          #FILE_OVPN: '.github/vpn/config.ovpn'
         env:
           USER_CRT: ${{ secrets.VPN_USER_USERNAME }}
           USER_KEY: ${{ secrets.VPN_USER_PASSWORD }}
