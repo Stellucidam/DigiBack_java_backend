@@ -19,3 +19,12 @@ jobs:
             ${{ runner.os }}-maven-
       #- name: Start Docker Images
       #  run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
+      - name: Upload application
+        uses: appleboy/scp-action@master
+        with:       
+          host: ${{ secrets.VM_HOSTNAME }}        
+          username: ${{ secrets.VM_USER_USERNAME }}      
+          key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
+          port: 22
+          source: "my-app.jar"      
+          target: "~/source"
