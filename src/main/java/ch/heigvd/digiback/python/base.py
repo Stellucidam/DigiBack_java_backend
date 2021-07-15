@@ -69,6 +69,7 @@ for label in recordings.keys():             # stack the recordings with the same
     recordings[label] = np.dstack(recordings[label])
     print(f'label {label}: {recordings[label].shape[2]} repetitions.')
 
+print(f'{recordings}')
 # the resulting recordings shape is [n_samples x 6 x n_repetitions]
 
 
@@ -120,7 +121,7 @@ plt.xlabel('Component')
 plt.grid(axis='y')
 
 print(f'First two components keep {100*(pca.explained_variance_ratio_[0] + pca.explained_variance_ratio_[1])} percent of the total variance')
-
+plt.savefig('C:\\Users\\clari\\Documents\\HEIG\\BA6\\TB\\java_backend\\src\\main\\java\\ch\\heigvd\\digiback\\python\\data\\books_read.png')
 
 # In[ ]:
 

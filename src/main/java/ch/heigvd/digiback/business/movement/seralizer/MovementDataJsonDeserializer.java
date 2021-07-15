@@ -1,8 +1,6 @@
 package ch.heigvd.digiback.business.movement.seralizer;
 
-import ch.heigvd.digiback.business.movement.MovementData;
-import ch.heigvd.digiback.business.movement.MovementType;
-import ch.heigvd.digiback.business.movement.credential.MovementDataCredential;
+import ch.heigvd.digiback.business.movement.credential.AngleCredential;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -10,10 +8,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.*;
 
-public class MovementDataJsonDeserializer extends JsonDeserializer<MovementDataCredential> {
+public class MovementDataJsonDeserializer extends JsonDeserializer<AngleCredential> {
 
     @Override
-    public MovementDataCredential deserialize(
+    public AngleCredential deserialize(
             JsonParser jsonParser,
             DeserializationContext deserializationContext
     ) throws IOException {
@@ -25,7 +23,7 @@ public class MovementDataJsonDeserializer extends JsonDeserializer<MovementDataC
         Float zLinearAcc = node.get("zLinearAcc").floatValue();
         Float absoluteLinearAcc = node.get("absoluteLinearAcc").floatValue();
 
-        return MovementDataCredential.builder()
+        return AngleCredential.builder()
                 .time(time)
                 .xLinearAcc(xLinearAcc)
                 .yLinearAcc(yLinearAcc)

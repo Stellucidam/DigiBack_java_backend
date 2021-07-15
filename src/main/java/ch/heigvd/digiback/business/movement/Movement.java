@@ -27,7 +27,7 @@ public class Movement {
 
     @Getter
     @OneToMany
-    private List<MovementData> movementData;
+    private List<Angle> angles;
 
     @Getter
     @ManyToOne

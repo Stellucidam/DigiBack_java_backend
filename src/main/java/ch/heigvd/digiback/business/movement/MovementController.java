@@ -28,7 +28,7 @@ public class MovementController {
     private MovementRepository movementRepository;
 
     @Autowired
-    private MovementDataRepository movementDataRepository;
+    private AngleRepository angleRepository;
 
     @PostMapping("/user/{idUser}/upload/level/{level}")
     public Status uploadMovementDataWithPain(
@@ -108,23 +108,20 @@ public class MovementController {
     }
 
     private void saveMovement(MovementCredential movementCredential, User authenticated, Pain pain) {
-        LinkedList<MovementData> movementDatas = new LinkedList<>();
+        LinkedList<Angle> angles = new LinkedList<>();
 
-        movementCredential.getMovementDataCredentials().forEach(movementDataCredential -> {
-            MovementData movementData = MovementData.builder()
-                    .yLinearAcc(movementDataCredential.getYLinearAcc())
-                    .zLinearAcc(movementDataCredential.getZLinearAcc())
-                    .xLinearAcc(movementDataCredential.getXLinearAcc())
-                    .absoluteLinearAcc(movementDataCredential.getAbsoluteLinearAcc())
-                    .time(movementDataCredential.getTime())
+        movementCredential.getAngleCredentials().forEach(movementDataCredential -> {
+            Angle angle = Angle.builder()
+                    .angle(movementDataCredential.getAngle())
+                    .position(movementDataCredential.getPosition())
                     .build();
-            movementDataRepository.saveAndFlush(movementData);
-            movementDatas.add(movementData);
+            angleRepository.saveAndFlush(angle);
+            angles.add(angle);
         });
         Movement movement = Movement.builder()
                 .type(movementCredential.getType())
                 .date(movementCredential.getDate())
-                .movementData(movementDatas)
+                .angles(angles)
                 .user(authenticated)
                 .pain(pain)
                 .build();

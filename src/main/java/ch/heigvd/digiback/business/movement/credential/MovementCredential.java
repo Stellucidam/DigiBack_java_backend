@@ -13,5 +13,5 @@ public class MovementCredential {
     private Long idUser;
     private MovementType type;
     private Date date;
-    private List<MovementDataCredential> movementDataCredentials;
+    private List<AngleCredential> angleCredentials;
 }

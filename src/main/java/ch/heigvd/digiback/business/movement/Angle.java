@@ -9,25 +9,16 @@ import javax.persistence.*;
 @Builder
 @Entity
 @EqualsAndHashCode
-public class MovementData {
+public class Angle {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMovementData;
+    private Long idAngle;
 
     @Getter
-    private Float time;
+    private int position;
 
     @Getter
-    private Float xLinearAcc;
-
-    @Getter
-    private Float yLinearAcc;
-
-    @Getter
-    private Float zLinearAcc;
-
-    @Getter
-    private Float absoluteLinearAcc;
+    private Float angle;
 
 }

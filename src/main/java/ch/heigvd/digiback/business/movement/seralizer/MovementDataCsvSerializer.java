@@ -1,6 +1,6 @@
 package ch.heigvd.digiback.business.movement.seralizer;
 
-import ch.heigvd.digiback.business.movement.MovementData;
+import ch.heigvd.digiback.business.movement.Angle;
 import ch.heigvd.digiback.util.CsvUtil;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
+public class MovementDataCsvSerializer implements CsvUtil<Angle> {
     private final static String[] CSV_HEADER = {
             "Time (s)",
             "Linear Acceleration x (m/s^2)",
@@ -20,25 +20,25 @@ public class MovementDataCsvSerializer implements CsvUtil<MovementData> {
     };
 
     @Override
-    public void ToCsv(Writer writer, List<MovementData> val) throws IOException {
+    public void ToCsv(Writer writer, List<Angle> val) throws IOException {
 
     }
 
     @Override
-    public List<MovementData> parseCsvFile(InputStream is) {
+    public List<Angle> parseCsvFile(InputStream is) {
         Reader fileReader = null;
-        CsvToBean<MovementData> csvToBean = null;
-        List<MovementData> movements = new ArrayList<MovementData>();
+        CsvToBean<Angle> csvToBean = null;
+        List<Angle> movements = new ArrayList<Angle>();
 
         try {
             fileReader = new InputStreamReader(is);
 
-            ColumnPositionMappingStrategy<MovementData> mappingStrategy = new ColumnPositionMappingStrategy<>();
+            ColumnPositionMappingStrategy<Angle> mappingStrategy = new ColumnPositionMappingStrategy<>();
 
-            mappingStrategy.setType(MovementData.class);
+            mappingStrategy.setType(Angle.class);
             mappingStrategy.setColumnMapping(CSV_HEADER);
 
-            csvToBean = new CsvToBeanBuilder<MovementData>(fileReader)
+            csvToBean = new CsvToBeanBuilder<Angle>(fileReader)
                     .withMappingStrategy(mappingStrategy)
                     .withSkipLines(1)
                     .withIgnoreLeadingWhiteSpace(true)
