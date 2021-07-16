@@ -6,5 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class Stat {
-    String stat;
+    private String stat;
+    private float highestAngle;
+    private float angleAverage;
 }

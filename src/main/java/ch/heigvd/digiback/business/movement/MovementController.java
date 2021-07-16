@@ -1,16 +1,18 @@
 package ch.heigvd.digiback.business.movement;
 
-import ch.heigvd.digiback.error.exception.WrongCredentialsException;
 import ch.heigvd.digiback.business.movement.credential.MovementCredential;
 import ch.heigvd.digiback.business.pain.Pain;
 import ch.heigvd.digiback.business.pain.PainRepository;
-import ch.heigvd.digiback.status.Status;
-import ch.heigvd.digiback.status.StatusType;
 import ch.heigvd.digiback.business.user.User;
 import ch.heigvd.digiback.business.user.UserRepository;
+import ch.heigvd.digiback.error.exception.WrongCredentialsException;
+import ch.heigvd.digiback.status.Status;
+import ch.heigvd.digiback.status.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Optional;
 
@@ -29,6 +31,19 @@ public class MovementController {
 
     @Autowired
     private AngleRepository angleRepository;
+
+    @GetMapping("/user/{idUser}/days/{dayNbr}")
+    public LinkedList<Movement> getMovements(
+            @RequestParam(name = "token") String token,
+            @PathVariable(name = "idUser") Long idUser,
+            @PathVariable(name = "dayNbr") int dayNbr)
+            throws WrongCredentialsException {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -dayNbr);
+        return movementRepository.findByUserAndDateAfter(
+                findVerifiedUserByIdAndToken(idUser, token).orElseThrow(WrongCredentialsException::new),
+                (Date) cal.getTime());
+    }
 
     @PostMapping("/user/{idUser}/upload/level/{level}")
     public Status uploadMovementDataWithPain(
