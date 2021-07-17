@@ -6,6 +6,7 @@ import ch.heigvd.digiback.business.user.User;
 import ch.heigvd.digiback.business.user.UserRepository;
 import ch.heigvd.digiback.error.exception.WrongCredentialsException;
 import ch.heigvd.digiback.python.PythonRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -18,33 +19,33 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequestMapping("/stat")
 public class StatisticController {
 
+    @Autowired
     private UserRepository userRepository;
-    private MovementRepository movementRepository;
 
-    public StatisticController(UserRepository userRepository, MovementRepository movementRepository) {
-        this.userRepository = userRepository;
-        this.movementRepository = movementRepository;
-    }
+    @Autowired
+    private MovementRepository movementRepository;
 
     @GetMapping("/")
     public Stat getStats() {
         String stat = "";
         try {
-            return Stat.builder().stat(PythonRunner.run()).build();
+            return Stat.builder()
+                    .stat(PythonRunner.run())
+                    .build();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return Stat.builder().stat("ERROR").build();
     }
 
-    @GetMapping("/user/{idUser}/days/{dayNbr}")
-    public Stat getMovementStats(
+    @GetMapping("/user/{idUser}/days/{daysNbr}")
+    public Stat getStatsForUserAndDays(
             @RequestParam(name = "token") String token,
             @PathVariable(name = "idUser") Long idUser,
-            @PathVariable(name = "dayNbr") int dayNbr)
+            @PathVariable(name = "daysNbr") int daysNbr)
             throws WrongCredentialsException {
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -dayNbr);
+        cal.add(Calendar.DATE, -daysNbr);
         LinkedList<Movement> movements =  movementRepository.findByUserAndDateAfter(
                 findVerifiedUserByIdAndToken(idUser, token).orElseThrow(WrongCredentialsException::new),
                 (Date) cal.getTime());
