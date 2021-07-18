@@ -25,10 +25,12 @@ jobs:
           with:
             OVPN: ${{ secrets.OVPN}}
             VPN_SECRET: ${{ secrets.VPN_SECRET }}
+
       - name: Write VPN Files
         run: |
           mkdir ~/.ssh
           echo "$OVPN" > .github/vpn.ovpn
+
       - name: Install Open VPN
         run: |
           git remote add deploy $DEPLOY_URL
