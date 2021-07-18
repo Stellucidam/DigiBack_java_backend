@@ -1,0 +1,71 @@
+name: deploy
+on: [push, pull_request]
+
+jobs:
+  workflow_dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: JDK setup
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      #- name: Start Docker Images
+      #  run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
+
+      - name: Set Variables
+          uses: allenevans/set-env@v2.0.0
+          with:
+            OVPN: ${{ secrets.OVPN}}
+            VPN_SECRET: ${{ secrets.VPN_SECRET }}
+      - name: Write VPN Files
+        run: |
+          mkdir ~/.ssh
+          echo "$OVPN" > .github/vpn.ovpn
+      - name: Install Open VPN
+        run: |
+          git remote add deploy $DEPLOY_URL
+          sudo apt install apt-transport-https
+          sudo wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
+          sudo apt-key add openvpn-repo-pkg-key.pub
+          sudo wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-bionic.list
+          sudo apt update
+          sudo apt install openvpn3
+
+      - name: Start Open VPN 3
+        run: |
+          { echo user ; echo $VPN_SECRET ; } | openvpn3 session-start --config .github/vpn.ovpn
+
+      - name: Connect VPN
+        uses: golfzaptw/action-connect-ovpn@master
+        id: connect_vpn
+        with:
+          PING_URL: ${{ secrets.VPN_HOSTNAME }}
+          FILE_OVPN: '.github/vpn/config.ovpn'
+          SECRET: ${{ secrets.SECRET_USERNAME_PASSWORD }}
+        env:
+          CA_CRT: ${{ secrets.CA_CRT}}
+          USER_CRT: ${{ secrets.VPN_USER_USERNAME }}
+          USER_KEY: ${{ secrets.VPN_USER_PASSWORD }}
+
+      - name: Check Connect VPN
+        run: echo ${{ steps.connect_vpn.outputs.STATUS }}
+
+      - name: Start Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOSTNAME }}
+          username: ${{ secrets.VM_USER_USERNAME }}
+          key: ${{ secrets.VM_USER_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd DigiBack_java_backend
+            git pull
+            ./start_docker.sh
