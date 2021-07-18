@@ -43,7 +43,7 @@ jobs:
 
       - name: Start Open VPN 3
         run: |
-          { echo user ; echo $VPN_SECRET ; } | openvpn3 session-start --config .github/vpn.ovpn
+          { echo ${{ secrets.VPN_USER_USERNAME }} ; echo $VPN_SECRET ; } | openvpn3 session-start --config .github/vpn.ovpn
 
       - name: Connect VPN
         uses: golfzaptw/action-connect-ovpn@master
