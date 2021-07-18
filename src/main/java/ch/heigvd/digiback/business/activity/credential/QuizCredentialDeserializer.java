@@ -28,7 +28,6 @@ public class QuizCredentialDeserializer extends JsonDeserializer<QuizCredential>
 
         logger.info("Deserialized quiz");
         return QuizCredential.builder()
-                .idUser(idUser)
                 .date(Date.valueOf(date))
                 .nbrQuiz(nbrQuiz)
                 .build();

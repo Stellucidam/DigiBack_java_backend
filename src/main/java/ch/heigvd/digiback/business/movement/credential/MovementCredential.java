@@ -10,7 +10,6 @@ import java.util.List;
 @Builder
 @Data
 public class MovementCredential {
-    private Long idUser;
     private MovementType type;
     private Date date;
     private List<AngleCredential> angleCredentials;

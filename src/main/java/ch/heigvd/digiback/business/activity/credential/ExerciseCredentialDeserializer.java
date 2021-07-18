@@ -28,7 +28,6 @@ public class ExerciseCredentialDeserializer extends JsonDeserializer<ExerciseCre
 
         logger.info("Deserialized exercise");
         return ExerciseCredential.builder()
-                .idUser(idUser)
                 .date(Date.valueOf(date))
                 .nbrExercises(nbrExercises)
                 .build();

@@ -10,6 +10,9 @@
   - [Client](#client-2)
 - [Activité](#activite)
   - [Client](#client-3)
+    - [Pas](#pas)
+    - [Quiz](#quiz)
+    - [Exercices](#exercices)
   - [Serveur](#serveur-1)
 
 # Utilisateur
@@ -36,16 +39,20 @@ Quand le serveur doit envoyer un utilisateur au client.
 Quand le client doit envoyer un mouvement au serveur.
 ```json
 {
-  "idUser" : 1,
   "type" : "FRONT_TILT",
   "date" : "2021-03-03",
-  "movementDataCredentials" : [
+  "angles" : [
     {
-      "time" : "6.747455300E-2",
-      "xLinearAcc" : "-3.747564554E-2",
-      "yLinearAcc" : "3.365421295E-2",
-      "zLinearAcc" : "-4.718399048E-2",
-      "absoluteLinearAcc" : "6.901709220E-2"
+      "position" : 0,
+      "angle" : 91.2
+    },
+    {
+      "position" : 1,
+      "angle" : 90.24
+    },
+    {
+      "position" : 2,
+      "angle" : 89.1
     }
   ]
 }
@@ -56,7 +63,6 @@ Quand le client doit envoyer un mouvement au serveur.
 Quand le client doit envoyer un niveau de douleur au serveur.
 ```json
 {
-    "idUser" : 1,
     "movementType" : "FRONT_TILT",
     "date" : "2021-03-03",
     "level" : 4
@@ -75,11 +81,35 @@ Quand le client doit envoyer une activité au serveur.
   "nbrQuiz": 22
 }
 ```
+### Pas
+Quand le client doit envoyer un nombre de pas au serveur.
+```json
+{
+  "date": "2020-01-01",
+  "nbrSteps": 12
+}
+```
+### Quiz
+Quand le client doit envoyer un nombre de quiz au serveur.
+```json
+{
+  "date": "2020-01-01",
+  "nbrQuiz": 22
+}
+```
+### Exercices
+Quand le client doit envoyer un nombre d'exercices au serveur.
+```json
+{
+  "date": "2020-01-01",
+  "nbrExercices": 2
+}
+```
+
 ## Serveur
 Quand le serveur doit envoyer une activité au client.
 ```json
 {
-  "idUser": 1,
   "date": "2020-01-02",
   "nbrSteps": 12,
   "nbrExercices": 2,

@@ -9,7 +9,6 @@ import java.sql.Date;
 @Builder
 @Data
 public class PainCredential {
-    private Long idUser;
     private MovementType movementType;
     private Date date;
     private int level;

@@ -8,7 +8,6 @@ import java.sql.Date;
 @Builder
 @Data
 public class ActivityCredential {
-    private Long idUser;
     private Date date;
     private Long nbrSteps;
     private Long nbrExercices;

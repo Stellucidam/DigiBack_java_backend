@@ -28,7 +28,6 @@ public class StepCredentialDeserializer extends JsonDeserializer<StepCredential>
 
         logger.info("Deserialized step");
         return StepCredential.builder()
-                .idUser(idUser)
                 .date(Date.valueOf(date))
                 .nbrSteps(nbrSteps)
                 .build();

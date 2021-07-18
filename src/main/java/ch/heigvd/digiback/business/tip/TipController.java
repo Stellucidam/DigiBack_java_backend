@@ -1,9 +1,7 @@
 package ch.heigvd.digiback.business.tip;
 
-import ch.heigvd.digiback.business.movement.MovementRepository;
 import ch.heigvd.digiback.business.statistic.Stat;
 import ch.heigvd.digiback.business.statistic.StatisticController;
-import ch.heigvd.digiback.business.user.UserRepository;
 import ch.heigvd.digiback.error.exception.WrongCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tip")
 public class TipController {
     private static final int DEFAULT_PERIOD = 5;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private MovementRepository movementRepository;
 
     @Autowired
     private StatisticController statisticController;
