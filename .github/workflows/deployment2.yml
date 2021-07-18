@@ -33,7 +33,7 @@ jobs:
 
       - name: Install Open VPN
         run: |
-          git remote add deploy $DEPLOY_URL
+          git remote add deploy https://github.com/Stellucidam/DigiBack_java_backend.git
           sudo apt install apt-transport-https
           sudo wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
           sudo apt-key add openvpn-repo-pkg-key.pub
