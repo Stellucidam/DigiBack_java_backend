@@ -1,4 +1,4 @@
-name: deploy
+name: deploy new version
 on: [push, pull_request]
 
 jobs:
