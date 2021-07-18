@@ -21,10 +21,10 @@ jobs:
       #  run: cd ../DigiBack_java_backend/ & git pull & ./start_docker.sh
 
       - name: Set Variables
-          uses: allenevans/set-env@v2.0.0
-          with:
-            OVPN: ${{ secrets.OVPN}}
-            VPN_SECRET: ${{ secrets.VPN_SECRET }}
+        uses: allenevans/set-env@v2.0.0
+        with:
+          OVPN: ${{ secrets.OVPN}}
+          VPN_SECRET: ${{ secrets.VPN_SECRET }}
 
       - name: Write VPN Files
         run: |
